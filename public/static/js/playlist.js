@@ -175,7 +175,8 @@
       clearUnavailable(index);
       playerEl.replaceWithMedia(mediaId, { playerColor: PLAYER_COLOR, transition: 'fade' });
       watchMedia(index);
-      playWhenReady(playerEl);
+      // Ne pas démarrer automatiquement la lecture au changement d'élément
+      // playWhenReady(playerEl);
     } else {
       // Repli : on recrée l'élément (le composant ne connaît pas la méthode).
       mount(mediaId);
