@@ -152,9 +152,12 @@ Les vignettes vidéo ne sont pas stockées localement : elles proviennent des CD
 
 ## Déploiement
 
-- **Plateforme cible** : Cloudflare Pages (edge computing global)
+Le site est rendu côté serveur par Hono (Cloudflare Pages), mais **tous les contenus sont statiques** : `npm run build` pré-rend donc aussi `dist/index.html`, ce qui permet un hébergement 100 % statique (Netlify, GitHub Pages, tout CDN).
+
+- **Cloudflare Pages** : commande `npm run build`, dossier `dist` (le Worker `dist/_worker.js` est prioritaire)
+- **Netlify** : configuration automatique via `netlify.toml` (`command = npm run build`, `publish = dist`)
 - **Stack technique** : Hono 4 + TypeScript + Vite + TailwindCSS (CDN) + GSAP + Font Awesome
-- **Build** : `npm run build` → génère `dist/_worker.js` (~96 KB, 30 KB gzip)
+- **Build** : `npm run build` → `dist/_worker.js` (~97 KB, 31 KB gzip) + `dist/index.html` (~90 Ko)
 - **Dernière mise à jour** : 2026-10-02
 
 ### Commandes utiles
