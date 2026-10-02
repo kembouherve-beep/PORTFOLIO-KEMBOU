@@ -1,0 +1,1286 @@
+/* =========================================================
+   KEMBOU — Portfolio 2026
+   Style premium cinématographique
+   ========================================================= */
+
+:root {
+  --color-black: #050505;
+  --color-navy: #071525;
+  --color-navy-light: #0a1830;
+  --color-gold: #f5c25b;
+  --color-gold-bright: #ffd876;
+  --color-blue-electric: #4a90ff;
+  --color-white: #f5f5f5;
+  --color-gray: #8a8a8a;
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+  --font-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+}
+
+/* ============ RESET ============ */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  font-family: 'Inter', 'Space Grotesk', sans-serif;
+  background: var(--color-black);
+  color: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ============ TYPOGRAPHIE ============ */
+.font-display {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* ============ SCROLLBAR ============ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--color-gold), #b8862a);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-bright);
+}
+
+/* ============ SELECTION ============ */
+::selection {
+  background: var(--color-gold);
+  color: var(--color-black);
+}
+
+/* ============ NAV GLASS ============ */
+.glass-nav {
+  background: rgba(10, 10, 15, 0.6);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+#main-nav.scrolled .glass-nav {
+  background: rgba(5, 5, 5, 0.85);
+  border-color: rgba(245, 194, 91, 0.15);
+}
+
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--color-gold);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+.nav-link.active,
+.nav-link:hover {
+  color: var(--color-gold) !important;
+}
+.nav-link.active::after,
+.nav-link:hover::after {
+  width: 16px;
+}
+
+/* ============ BACKGROUND EFFECTS ============ */
+.bg-gradient-radial-gold {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(245, 194, 91, 0.08) 0%,
+    rgba(7, 21, 37, 0.4) 40%,
+    #050505 80%
+  );
+}
+
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* =========================================================
+   HERO — CARTE ÉDITORIALE 3 ZONES
+   Noir profond · blanc cassé · gris · or en accent
+   Desktop  : GAUCHE | PORTRAIT | DROITE
+   Mobile   : ACCUEIL → statut → PORTRAIT → KEMBOU → texte → +10 / +500 → CTA
+   ========================================================= */
+.hro {
+  --hro-bg: #050608;
+  --hro-bg-2: #0b0d0f;
+  --hro-white: #f5f5f5;
+  --hro-grey: #858585;
+  --hro-gold: #f5a623;
+  --hro-line: rgba(255, 255, 255, 0.15);
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 7rem 1.25rem 4.5rem;
+  background: var(--hro-bg);
+  overflow: hidden;
+}
+
+/* ---------- Fond : radial doux, grille technique, halos ---------- */
+.hro-veil {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(245, 166, 35, 0.07), transparent 60%),
+    radial-gradient(90% 70% at 12% 110%, rgba(245, 166, 35, 0.05), transparent 65%),
+    radial-gradient(120% 120% at 50% 50%, var(--hro-bg-2) 0%, var(--hro-bg) 70%);
+}
+.hro-veil::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: radial-gradient(80% 70% at 50% 40%, #000 20%, transparent 78%);
+  mask-image: radial-gradient(80% 70% at 50% 40%, #000 20%, transparent 78%);
+}
+
+/* ---------- Mention décorative « 01 », presque invisible ---------- */
+.hro-ghost {
+  position: absolute;
+  right: 2%;
+  bottom: -7%;
+  z-index: -1;
+  font-family: var(--font-display);
+  font-size: clamp(16rem, 42vw, 34rem);
+  font-weight: 900;
+  line-height: 0.78;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
+  opacity: 0.06;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---------- La carte ---------- */
+.hro-card {
+  position: relative;
+  width: min(100%, 76rem);
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.25fr) minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    'eyebrow portrait right'
+    'left    portrait right'
+    'left    portrait cta';
+  gap: 1.5rem 2rem;
+  border: 1px solid var(--hro-line);
+  border-radius: 24px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012));
+  box-shadow:
+    0 30px 80px -30px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  animation: hro-card-in 0.8s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+/* ---------- 01 — ACCUEIL + statut ---------- */
+.hro-eyebrow {
+  grid-area: eyebrow;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+  animation: hro-rise 0.6s cubic-bezier(0.2, 0.7, 0.3, 1) 0.12s both;
+}
+.hro-index {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--hro-gold);
+}
+.hro-index::after {
+  content: '';
+  width: 3rem;
+  height: 1px;
+  background: var(--hro-gold);
+  opacity: 0.7;
+}
+.hro-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: rgba(245, 245, 245, 0.78);
+}
+.hro-status-dot {
+  position: relative;
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--hro-gold);
+  box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.16);
+}
+.hro-status-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border: 1px solid var(--hro-gold);
+  border-radius: 50%;
+  animation: hro-pulse 2.6s ease-out infinite;
+}
+
+/* ---------- ZONE GAUCHE : FONCTION · EXPÉRIENCE · +500 ---------- */
+.hro-left {
+  grid-area: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  min-width: 0;
+  animation: hro-rise 0.6s cubic-bezier(0.2, 0.7, 0.3, 1) 0.24s both;
+}
+.hro-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.25rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+.hro-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.hro-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--hro-grey);
+}
+.hro-value {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 1.9vw, 1.75rem);
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--hro-white);
+}
+.hro-value-sm {
+  font-size: clamp(0.92rem, 1.15vw, 1.02rem);
+  font-weight: 700;
+  line-height: 1.35;
+}
+.hro-field-count {
+  gap: 0.35rem;
+}
+.hro-count {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--hro-white);
+}
+.hro-count-rule {
+  display: block;
+  width: 2.75rem;
+  height: 2px;
+  margin-top: 0.7rem;
+  background: var(--hro-gold);
+}
+
+/* ---------- ZONE CENTRE : portrait ---------- */
+.hro-portrait {
+  grid-area: portrait;
+  position: relative;
+  margin: 0;
+  min-height: 26rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  background: var(--hro-bg-2);
+  overflow: hidden;
+}
+.hro-portrait-media {
+  position: absolute;
+  inset: 0;
+  animation: hro-zoom 0.9s cubic-bezier(0.2, 0.7, 0.3, 1) 0.36s both;
+}
+.hro-portrait-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  filter: contrast(1.06) saturate(0.92) brightness(0.96);
+}
+/* Vignette + léger voile studio : le sujet reste net, le décor s'estompe */
+.hro-portrait::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(5, 6, 8, 0.72), transparent 45%),
+    radial-gradient(78% 68% at 50% 38%, transparent 38%, rgba(0, 0, 0, 0.55) 100%);
+}
+.hro-portrait-frame {
+  position: absolute;
+  inset: 0.75rem;
+  z-index: 2;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  pointer-events: none;
+}
+.hro-portrait-tag {
+  position: absolute;
+  left: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 3;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(5, 6, 8, 0.5);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  font-size: 0.58rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(245, 245, 245, 0.72);
+}
+
+/* ---------- ZONE DROITE : KEMBOU · texte ---------- */
+.hro-right {
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.1rem;
+  min-width: 0;
+}
+.hro-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(3.1rem, 7vw, 6.2rem);
+  font-weight: 900;
+  line-height: 0.86;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  color: #fff;
+  animation: hro-slide 0.7s cubic-bezier(0.2, 0.7, 0.3, 1) 0.48s both;
+}
+.hro-role {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--hro-white);
+  animation: hro-rise 0.6s cubic-bezier(0.2, 0.7, 0.3, 1) 0.56s both;
+}
+.hro-role-rule {
+  display: block;
+  flex: none;
+  width: 2.25rem;
+  height: 1px;
+  background: var(--hro-gold);
+}
+.hro-text {
+  margin: 0.35rem 0 0;
+  max-width: 34ch;
+  font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+  line-height: 1.65;
+  color: rgba(245, 245, 245, 0.8);
+  animation: hro-rise 0.6s cubic-bezier(0.2, 0.7, 0.3, 1) 0.62s both;
+}
+.hro-text-sub {
+  margin: 0.5rem 0 0;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  font-style: italic;
+  color: var(--hro-grey);
+  animation: hro-rise 0.6s cubic-bezier(0.2, 0.7, 0.3, 1) 0.68s both;
+}
+
+/* ---------- CTA ---------- */
+.hro-cta {
+  grid-area: cta;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  animation: hro-rise 0.6s cubic-bezier(0.2, 0.7, 0.3, 1) 0.76s both;
+}
+.hro-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.4rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition:
+    transform 0.28s cubic-bezier(0.2, 0.7, 0.3, 1),
+    filter 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease,
+    color 0.28s ease;
+}
+.hro-btn-primary {
+  background: var(--hro-gold);
+  color: #050608;
+}
+.hro-btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 12px 26px -12px rgba(245, 166, 35, 0.65);
+}
+.hro-btn-primary:hover .hro-btn-arrow {
+  transform: translateX(4px);
+}
+.hro-btn-arrow {
+  transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.hro-btn-ghost {
+  border-color: rgba(255, 255, 255, 0.28);
+  color: var(--hro-white);
+}
+.hro-btn-ghost:hover {
+  transform: translateY(-2px);
+  border-color: var(--hro-gold);
+  color: var(--hro-gold);
+}
+.hro-btn:focus-visible {
+  outline: 2px solid var(--hro-gold);
+  outline-offset: 3px;
+}
+
+/* ---------- Indicateur SCROLL ---------- */
+.hro-scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translateX(-50%);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  color: rgba(245, 245, 245, 0.4);
+}
+.hro-scroll-line {
+  display: block;
+  width: 1px;
+  height: 3rem;
+  background: linear-gradient(to bottom, rgba(245, 166, 35, 0.8), transparent);
+  animation: hro-scroll 2.4s ease-in-out infinite;
+}
+
+/* ---------- Animations d'entrée ---------- */
+@keyframes hro-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes hro-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes hro-slide {
+  from {
+    opacity: 0;
+    transform: translateX(-26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes hro-zoom {
+  from {
+    opacity: 0;
+    transform: scale(1.07);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes hro-pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+}
+@keyframes hro-scroll {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+/* Tablette : les 3 zones sont conservées, simplement plus serrées */
+@media (max-width: 1100px) {
+  .hro {
+    padding: 6.5rem 1rem 4rem;
+  }
+  .hro-card {
+    padding: 1.5rem;
+    gap: 1.25rem 1.5rem;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.15fr) minmax(0, 1fr);
+  }
+  .hro-portrait {
+    min-height: 23rem;
+  }
+  .hro-pair {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Mobile / petites tablettes : empilement dans l'ordre demandé */
+@media (max-width: 860px) {
+  .hro {
+    min-height: auto;
+    padding: 6.5rem 1rem 3rem;
+  }
+  .hro-card {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'eyebrow'
+      'portrait'
+      'right'
+      'left'
+      'cta';
+    gap: 1.5rem;
+    padding: 1.25rem;
+    border-radius: 18px;
+  }
+  .hro-left {
+    gap: 1.5rem;
+  }
+  .hro-pair {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .hro-name {
+    font-size: clamp(3rem, 15vw, 4.6rem);
+  }
+  .hro-text {
+    max-width: none;
+  }
+  .hro-scroll {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .hro-portrait {
+    min-height: 19rem;
+  }
+  .hro-cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hro-cta .hro-btn {
+    justify-content: center;
+  }
+}
+
+/* ---------- Accessibilité : mouvement réduit ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hro-card,
+  .hro-eyebrow,
+  .hro-left,
+  .hro-portrait-media,
+  .hro-name,
+  .hro-role,
+  .hro-text,
+  .hro-text-sub,
+  .hro-cta {
+    animation: none !important;
+    opacity: 1;
+  }
+  .hro-status-dot::after,
+  .hro-scroll-line {
+    animation: none;
+  }
+  .hro-btn,
+  .hro-btn-arrow {
+    transition: none;
+  }
+}
+
+/* ============ SECTION REVEAL (via IntersectionObserver) ============ */
+.reveal-text,
+.reveal-fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-text.visible,
+.reveal-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============ SKILL CARDS ============ */
+.skill-card {
+  position: relative;
+  isolation: isolate;
+}
+
+.skill-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(245, 194, 91, 0),
+    rgba(245, 194, 91, 0.3),
+    rgba(245, 194, 91, 0)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.skill-card:hover::before {
+  opacity: 1;
+}
+
+.skill-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(245, 194, 91, 0.1);
+}
+
+/* ==========================================================
+   04 — TRAVAUX DE RÉFÉRENCE : LECTEUR WISTIA + PLAYLIST
+   ========================================================== */
+
+/* Apparition au scroll du bloc lecteur + playlist */
+.wpl {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wpl.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Grille : lecteur à gauche, playlist à droite ---------- */
+.wpl {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .wpl {
+    grid-template-columns: minmax(0, 1fr) 22rem;
+    gap: 2rem;
+    align-items: start;
+  }
+}
+
+/* ---------- Scène de lecture ---------- */
+.wpl-stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 40px rgba(245, 194, 91, 0.08);
+}
+
+.wpl-stage wistia-player {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.wpl-stage-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wpl-stage-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4.5rem;
+  height: 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: rgba(245, 194, 91, 0.92);
+  color: #050505;
+  font-size: 1.15rem;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.wpl-stage-play:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+  background: #f5c25b;
+}
+
+@media (min-width: 768px) {
+  .wpl-stage-play {
+    width: 5.5rem;
+    height: 5.5rem;
+    font-size: 1.4rem;
+  }
+}
+
+/* ---------- Média indisponible (sans casser le lecteur) ---------- */
+.wpl-error {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  text-align: center;
+  background: linear-gradient(135deg, #0a1220, #050505);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.875rem;
+}
+
+.wpl-error > i {
+  color: #f5c25b;
+  font-size: 1.75rem;
+}
+
+.wpl-error-text {
+  max-width: 22rem;
+  line-height: 1.6;
+}
+
+.wpl-error-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.wpl-error-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.15rem;
+  border-radius: 9999px;
+  background: #f5c25b;
+  color: #050505;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.wpl-error-link:hover {
+  background: #fff;
+}
+
+.wpl-error-link.is-ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.wpl-error-link.is-ghost:hover {
+  border-color: #f5c25b;
+  background: transparent;
+  color: #f5c25b;
+}
+
+/* ---------- Titre + navigation sous le lecteur ---------- */
+.wpl-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.wpl-count {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.45);
+  flex: none;
+}
+
+.wpl-count-sep {
+  margin: 0 0.3rem;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.wpl-title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #fff;
+  flex: 1 1 12rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 768px) {
+  .wpl-title {
+    font-size: 1.5rem;
+  }
+}
+
+.wpl-nav {
+  display: flex;
+  gap: 0.5rem;
+  flex: none;
+}
+
+.wpl-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.wpl-nav-btn:hover:not(:disabled) {
+  border-color: rgba(245, 194, 91, 0.5);
+  color: #f5c25b;
+  background: rgba(245, 194, 91, 0.06);
+}
+
+.wpl-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ---------- Colonne playlist ---------- */
+.wpl-aside {
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.04), transparent);
+  overflow: hidden;
+}
+
+.wpl-aside-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.9rem 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.wpl-aside-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #f5c25b;
+}
+
+.wpl-aside-total {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Défilement propre de la playlist */
+.wpl-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem;
+  max-height: 22rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(245, 194, 91, 0.35) transparent;
+}
+
+@media (min-width: 1024px) {
+  .wpl-list {
+    max-height: 34rem;
+  }
+}
+
+.wpl-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.wpl-list::-webkit-scrollbar-thumb {
+  background: rgba(245, 194, 91, 0.35);
+  border-radius: 9999px;
+}
+
+/* ---------- Entrée de playlist ---------- */
+.wpl-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  text-align: left;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.72);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.wpl-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.wpl-item.is-active {
+  background: rgba(245, 194, 91, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(245, 194, 91, 0.45);
+  color: #fff;
+}
+
+.wpl-item-num {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.35);
+  flex: none;
+  width: 1.25rem;
+}
+
+.wpl-item.is-active .wpl-item-num {
+  color: #f5c25b;
+}
+
+.wpl-item-thumb {
+  position: relative;
+  flex: none;
+  width: 5rem;
+  aspect-ratio: 16 / 9;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  background: #0a1220;
+}
+
+.wpl-item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.wpl-item:hover .wpl-item-thumb img {
+  transform: scale(1.06);
+  opacity: 1;
+}
+
+.wpl-item-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.wpl-item:hover .wpl-item-play,
+.wpl-item.is-active .wpl-item-play {
+  opacity: 1;
+}
+
+.wpl-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.wpl-item-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+}
+
+.wpl-item-sub {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.wpl-item.is-active .wpl-item-sub {
+  color: rgba(245, 194, 91, 0.85);
+}
+
+/* Signalement d'une vidéo non lisible (elle reste sélectionnable) */
+.wpl-item-flag {
+  display: none;
+  font-family: var(--font-body);
+  font-size: 0.5625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fbbf24;
+}
+
+.wpl-item.is-unavailable .wpl-item-thumb {
+  opacity: 0.4;
+}
+
+.wpl-item.is-unavailable .wpl-item-flag {
+  display: inline;
+}
+
+/* Focus visible global pour la navigation clavier */
+:where(button, a, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* Survol "pointer fin" : pas d'effet de survol sur tactile */
+@media (hover: none) {
+  .wpl-item-play {
+    opacity: 1;
+  }
+}
+
+/* ============ TIMELINE EXPÉRIENCE ============ */
+.exp-item {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.exp-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============ TOOL CARDS ============ */
+.tool-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.tool-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(245, 194, 91, 0.1) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.8s;
+  pointer-events: none;
+}
+
+.tool-card:hover::after {
+  transform: translateX(100%);
+}
+
+/* ============ PROCESS STEPS ============ */
+.process-step {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.process-step.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============ CURSEUR PERSONNALISÉ ============ */
+#cursor-dot,
+#cursor-ring {
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+.cursor-hover #cursor-ring {
+  width: 60px !important;
+  height: 60px !important;
+  border-color: var(--color-gold) !important;
+  background: rgba(245, 194, 91, 0.1);
+}
+
+/* Masquer curseur natif sur les éléments interactifs (desktop only) */
+@media (min-width: 768px) {
+  body {
+    cursor: none;
+  }
+  a, button, .skill-card, .tool-card {
+    cursor: none;
+  }
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 80px;
+  }
+}
+
+/* ============ CINEMATIC GRAIN OVERLAY GLOBAL ============ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9995;
+  mix-blend-mode: overlay;
+}
+
+/* ==========================================================
+   PREFERS-REDUCED-MOTION
+   L'utilisateur a désactivé les animations : on supprime
+   les transitions non essentielles, on garde l'affichage.
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Les éléments révélés au scroll doivent être visibles immédiatement */
+  .reveal-text,
+  .reveal-fade,
+  .exp-item,
+  .process-step,
+  .wpl {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Aucun zoom ni translation au survoll */
+  .skill-card:hover,
+  .tool-card:hover {
+    transform: none !important;
+  }
+
+  .group:hover img {
+    transform: none !important;
+  }
+}

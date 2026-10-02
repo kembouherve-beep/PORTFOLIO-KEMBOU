@@ -1,0 +1,855 @@
+/* =========================================================
+   KEMBOU — Section DESIGN GRAPHIQUE + Pressbook flipbook 3D
+   ------------------------------------------------------------
+   Isolé du style global : aucune règle ici ne cible un sélecteur
+   déjà utilisé ailleurs (tout est préfixé `dg-` ou `pb-`).
+   Réutilise les variables de style.css : --color-black,
+   --color-gold, --color-white, --font-display.
+   ========================================================= */
+
+:root {
+  --dg-bg: #050608;
+  --dg-accent: #ff7a14;
+  --dg-accent-dim: rgba(255, 122, 20, 0.42);
+  --dg-paper: #101116;
+  --pb-dur: 720ms;
+  --pb-ease: cubic-bezier(0.32, 0.06, 0.16, 1);
+}
+
+/* ============ SECTION ============ */
+.dg-section {
+  position: relative;
+  isolation: isolate;
+  background: var(--dg-bg);
+  padding: clamp(4.5rem, 9vw, 8.5rem) 0 clamp(5rem, 10vw, 9rem);
+  overflow: hidden;
+}
+
+/* Halos orange très discrets + texture de grille */
+.dg-atmos {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 10% 50%, rgba(255, 122, 20, 0.12), transparent 30%),
+    radial-gradient(circle at 92% 22%, rgba(255, 122, 20, 0.07), transparent 26%),
+    radial-gradient(circle at 74% 92%, rgba(255, 122, 20, 0.05), transparent 24%);
+}
+.dg-atmos::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 96px 96px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black, transparent 80%);
+}
+
+/* « 03 » géant, purement décoratif */
+.dg-ghost {
+  position: absolute;
+  left: -2vw;
+  bottom: -6vw;
+  z-index: 0;
+  font-family: var(--font-display);
+  font-size: clamp(16rem, 38vw, 34rem);
+  font-weight: 800;
+  line-height: 0.72;
+  letter-spacing: -0.06em;
+  color: rgba(255, 255, 255, 0.022);
+  pointer-events: none;
+  user-select: none;
+}
+
+.dg-shell {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 2.5rem, 86rem);
+  margin-inline: auto;
+}
+
+/* ============ EN-TÊTE ============ */
+.dg-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--dg-accent);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+}
+.dg-eyebrow::before {
+  content: '';
+  width: 2.2rem;
+  height: 1px;
+  background: var(--dg-accent-dim);
+}
+
+.dg-head {
+  margin-top: 1.75rem;
+}
+
+.dg-head-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.dg-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 8.4vw, 8rem);
+  font-weight: 800;
+  line-height: 0.84;
+  letter-spacing: -0.055em;
+}
+.dg-title-line {
+  display: block;
+  color: var(--color-white);
+}
+.dg-title-accent {
+  color: var(--dg-accent);
+  text-shadow: 0 0 60px rgba(255, 122, 20, 0.35);
+}
+
+.dg-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 0.9rem;
+  min-width: 14rem;
+}
+.dg-side-rule {
+  width: 100%;
+  max-width: 16rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--dg-accent), rgba(255, 122, 20, 0));
+}
+.dg-motto {
+  margin: 0;
+  color: rgba(245, 245, 245, 0.72);
+  font-size: clamp(0.7rem, 1.1vw, 0.86rem);
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.dg-desc {
+  margin: clamp(1.75rem, 3.5vw, 2.75rem) 0 0;
+  max-width: 46rem;
+  color: rgba(245, 245, 245, 0.62);
+  font-size: clamp(0.98rem, 1.35vw, 1.15rem);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+/* Signature décorative en bas à droite de l'en-tête */
+.dg-sign {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  display: flex;
+  justify-content: flex-end;
+}
+.dg-sign-text {
+  text-align: right;
+  color: rgba(245, 245, 245, 0.5);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  line-height: 1.9;
+  text-transform: uppercase;
+}
+.dg-sign-text::after {
+  content: '';
+  display: block;
+  width: 3.2rem;
+  height: 1px;
+  margin: 0.75rem 0 0 auto;
+  background: var(--dg-accent);
+}
+
+/* ============ CARTE PRESSBOOK ============ */
+.dg-card {
+  position: relative;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding: clamp(1.5rem, 3.5vw, 3rem);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: clamp(1.25rem, 2.5vw, 2rem);
+  background: linear-gradient(180deg, #0a0b0f 0%, #060709 100%);
+  box-shadow:
+    0 40px 120px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.dg-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(255, 122, 20, 0.16), transparent 70%);
+  pointer-events: none;
+}
+
+.dg-card-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.dg-flash {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--dg-accent);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+}
+.dg-flash::before {
+  content: '';
+  width: 1.8rem;
+  height: 1px;
+  background: var(--dg-accent);
+}
+
+.dg-card-title {
+  margin: 0.9rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.4vw, 3.4rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--color-white);
+}
+
+.dg-card-desc {
+  margin: 0.9rem 0 0;
+  max-width: 40rem;
+  color: rgba(245, 245, 245, 0.6);
+  font-size: 0.94rem;
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+.dg-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--dg-accent-dim);
+  border-radius: 999px;
+  color: var(--dg-accent);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ============ FLIPBOOK ============ */
+.pb {
+  position: relative;
+  margin-top: clamp(2rem, 4.5vw, 3.5rem);
+  --pb-tilt-x: 7deg;
+  --pb-tilt-y: -10deg;
+}
+.pb[data-mode='single'] {
+  overflow: hidden;
+}
+.pb[data-mode='single'] .pb-book {
+  /* Le livre fait deux largeurs de page ; seule la droite reste visible */
+  width: 200%;
+}
+.pb[data-mode='single'] .pb-clip {
+  left: 50%;
+  right: auto;
+  width: 50%;
+}
+.pb[data-mode='single'] .pb-stage {
+  --pb-tilt-x: 4deg;
+  --pb-tilt-y: -6deg;
+}
+
+.pb-book {
+  position: relative;
+  width: min(100%, 58rem);
+  margin-inline: auto;
+  aspect-ratio: 3.558 / 1;
+}
+
+/* Ombre portée sous le livre */
+.pb-book::after {
+  content: '';
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -7%;
+  height: 14%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.9), transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+/* Coupe + perspective. `overflow` est autorisé ici : cet élément
+   n'a pas `transform-style: preserve-3d` (la perspective est portée
+   par lui-même, pas par ses enfants). */
+.pb-clip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  perspective: 2400px;
+  perspective-origin: 50% 46%;
+  transition: left 0.4s var(--pb-ease), width 0.4s var(--pb-ease);
+}
+
+.pb-stage {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--pb-tilt-x)) rotateY(var(--pb-tilt-y));
+  transition: transform 0.5s var(--pb-ease);
+}
+
+/* ----pages de base (sous le feuillet) --- */
+.pb-base {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background: linear-gradient(180deg, #14151b, #0b0c10);
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.6);
+}
+.pb-base--left { left: 0; }
+
+/* Épaisseur du bloc de feuilles, sur les deux bords */
+.pb-edge {
+  position: absolute;
+  top: 1.5%;
+  bottom: 1.5%;
+  width: 6px;
+  /* Au-dessus des feuillets (z-index 1000–2000 posés en JS), sinon les
+     ombres disparaissent sous la pile de pages. */
+  z-index: 3600;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.13) 0 1px,
+    rgba(0, 0, 0, 0.5) 1px 3px
+  );
+  opacity: 0.55;
+}
+.pb-edge--left { left: -6px; border-radius: 3px 0 0 3px; }
+.pb-edge--right { right: -6px; border-radius: 0 3px 3px 0; }
+
+/* --- feuillets --- */
+.pb-sheet {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform var(--pb-dur) var(--pb-ease);
+  will-change: transform;
+  backface-visibility: visible;
+}
+.pb-sheet.is-flipped {
+  transform: rotateY(-180deg);
+}
+.pb-sheet.is-disabled {
+  transition: none;
+}
+
+.pb-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--dg-paper);
+  border-radius: 2px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 18px 40px rgba(0, 0, 0, 0.55);
+}
+.pb-face--back {
+  transform: rotateY(180deg);
+}
+
+.pb-face img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Évite le "flash" de page blanche tant que l'image n'est pas chargée */
+  background: #0c0d11;
+}
+
+/* Ombre portée sur la page pendant le retournement */
+.pb-face::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--pb-dur) var(--pb-ease);
+}
+.pb-stage.is-flip-forward .pb-face--front::after {
+  opacity: 1;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0) 55%);
+}
+.pb-stage.is-flip-back .pb-face--back::after {
+  opacity: 1;
+  background: linear-gradient(270deg, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0) 55%);
+}
+
+/* Ombre projetée sur la page du dessous */
+.pb-cast {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  z-index: 3200;
+  opacity: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0) 60%);
+}
+.pb-stage.is-flip-forward .pb-cast {
+  animation: pb-cast var(--pb-dur) var(--pb-ease);
+}
+@keyframes pb-cast {
+  0% { opacity: 0; }
+  45% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Ombre de la reliure, au centre */
+.pb-spine {
+  position: absolute;
+  top: -1%;
+  bottom: -1%;
+  left: 50%;
+  width: 9%;
+  z-index: 3400;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.6) 45%, rgba(0, 0, 0, 0.6) 55%, transparent);
+  opacity: 0.75;
+}
+
+/* --- couverture (feuillet 0, face avant) --- */
+.pb-cover {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: clamp(1rem, 4%, 2.2rem);
+  background: linear-gradient(150deg, #16171e 0%, #0a0b0f 60%, #131318 100%);
+}
+.pb-cover-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.22;
+  filter: grayscale(0.4) contrast(1.1);
+}
+.pb-cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(5, 6, 8, 0.96) 8%, rgba(5, 6, 8, 0.5) 55%, rgba(5, 6, 8, 0.8));
+}
+.pb-cover > * {
+  position: relative;
+  z-index: 1;
+}
+.pb-cover-kicker {
+  color: var(--dg-accent);
+  font-size: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+}
+.pb-cover-title {
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 2.4vw, 1.7rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--color-white);
+}
+.pb-cover-meta {
+  color: rgba(245, 245, 245, 0.5);
+  font-size: 0.52rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* Faux page (fin d'ouvrage) */
+.pb-endpaper {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(255, 122, 20, 0.07), transparent 60%),
+    linear-gradient(160deg, #0f1015, #08090c);
+}
+
+/* ============ NAVIGATION ============ */
+.pb-nav {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding-inline: clamp(-0.5rem, 0vw, 1rem);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.pb-btn {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: rgba(10, 11, 15, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: rgba(245, 245, 245, 0.8);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    transform 0.3s var(--pb-ease),
+    border-color 0.3s ease,
+    color 0.3s ease,
+    background 0.3s ease,
+    opacity 0.3s ease;
+}
+.pb-btn:hover:not(:disabled) {
+  transform: scale(1.08);
+  border-color: var(--dg-accent);
+  color: var(--dg-accent);
+  background: rgba(255, 122, 20, 0.08);
+}
+.pb-btn:focus-visible {
+  outline: 2px solid var(--dg-accent);
+  outline-offset: 3px;
+}
+.pb-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+/* Zones cliquables : moitié gauche = retour, moitié droite = avance */
+.pb-hit {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 4;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.pb-hit--prev { left: 0; }
+.pb-hit--next { right: 0; cursor: e-resize; }
+.pb-hit:focus-visible {
+  outline: 2px solid var(--dg-accent);
+  outline-offset: -4px;
+}
+
+/* ============ PIED DE CARTE ============ */
+.dg-card-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: clamp(1.75rem, 3.5vw, 2.75rem);
+  padding-top: clamp(1.25rem, 2.5vw, 1.75rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dg-count {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.dg-count-line {
+  width: 5.5rem;
+  height: 1px;
+  background: var(--dg-accent);
+}
+.dg-count-value {
+  font-family: var(--font-display);
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: rgba(245, 245, 245, 0.55);
+}
+.dg-count-value b {
+  font-weight: 700;
+  color: var(--color-white);
+}
+.dg-count-value span {
+  color: var(--dg-accent);
+}
+
+.dg-view {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(245, 245, 245, 0.85);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.35s ease, color 0.35s ease, background 0.35s ease;
+}
+.dg-view::after {
+  content: '';
+  position: absolute;
+  left: 1.4rem;
+  right: 1.4rem;
+  bottom: 0.55rem;
+  height: 1px;
+  background: var(--dg-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--pb-ease);
+}
+.dg-view:hover {
+  border-color: var(--dg-accent-dim);
+  color: var(--color-white);
+  background: rgba(255, 122, 20, 0.06);
+}
+.dg-view:hover::after {
+  transform: scaleX(1);
+}
+.dg-view:hover .dg-view-label {
+  transform: translateX(3px);
+}
+.dg-view:hover .dg-view-arrow {
+  transform: translateX(5px);
+}
+.dg-view:focus-visible {
+  outline: 2px solid var(--dg-accent);
+  outline-offset: 3px;
+}
+.dg-view-label,
+.dg-view-arrow {
+  transition: transform 0.4s var(--pb-ease);
+}
+.dg-view i {
+  color: var(--dg-accent);
+}
+
+/* ============ ANIMATION D'ENTRÉE ============ */
+.dg-anim {
+  opacity: 0;
+  transform: translateY(26px);
+}
+.dg-anim--ghost {
+  transform: none;
+  opacity: 0;
+}
+.dg-anim.is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.9s var(--pb-ease),
+    transform 0.9s var(--pb-ease);
+  transition-delay: var(--dg-delay, 0ms);
+}
+.dg-anim--ghost.is-in {
+  opacity: 1;
+  transition: opacity 1.4s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dg-anim,
+  .dg-anim--ghost {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .pb-sheet,
+  .pb-clip,
+  .pb-stage,
+  .pb-face::after {
+    transition-duration: 1ms;
+  }
+  .pb-stage.is-flip-forward .pb-cast {
+    animation: none;
+  }
+}
+
+/* ============ LIGHTBOX ============ */
+.dg-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 3rem);
+  background: rgba(0, 0, 0, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.dg-lightbox.is-open {
+  display: flex;
+  animation: dg-lb-in 0.35s ease;
+}
+@keyframes dg-lb-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.dg-lb-inner {
+  width: min(100%, 96rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.dg-lb-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.dg-lb-meta {
+  min-width: 0;
+}
+.dg-lb-title {
+  margin: 0.3rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.4vw, 1.7rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+}
+.dg-lb-kicker {
+  color: var(--dg-accent);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.dg-lb-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-white);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.dg-lb-close:hover {
+  transform: rotate(90deg);
+  border-color: var(--dg-accent);
+  color: var(--dg-accent);
+}
+.dg-lb-close:focus-visible {
+  outline: 2px solid var(--dg-accent);
+  outline-offset: 3px;
+}
+
+.dg-lb-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.dg-lb-hint {
+  color: rgba(245, 245, 245, 0.35);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.dg-lightbox .pb {
+  --pb-dur: 680ms;
+  --pb-tilt-x: 5deg;
+  --pb-tilt-y: -7deg;
+  margin-top: 0;
+}
+.dg-lightbox .pb-book {
+  width: min(100%, 88rem);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1023px) {
+  .dg-title { font-size: clamp(2.8rem, 7.6vw, 5rem); }
+  .pb { --pb-tilt-x: 5deg; --pb-tilt-y: -7deg; }
+  .pb-book { width: min(100%, 44rem); }
+}
+
+@media (max-width: 767px) {
+  .dg-side {
+    min-width: 0;
+    padding-bottom: 0;
+  }
+  .dg-head-main { gap: 1.5rem; }
+  .pb-nav { padding-inline: 0; }
+  .pb-btn { width: 2.6rem; height: 2.6rem; font-size: 0.9rem; }
+}
+
+@media (max-width: 639px) {
+  .dg-section { padding-top: 3.5rem; }
+  .dg-title { font-size: clamp(2.5rem, 12vw, 3.6rem); }
+  .dg-card { padding: 1.25rem; border-radius: 1.1rem; }
+  .dg-card-top { gap: 1rem; }
+  .dg-badge { padding: 0.5rem 0.85rem; font-size: 0.55rem; }
+  .dg-card-foot { gap: 1.25rem; }
+  .dg-view { width: 100%; justify-content: center; }
+  .pb[data-mode='single'] .pb-book { width: 200%; }
+}
+
+@media (max-width: 430px) {
+  .dg-title { font-size: clamp(2.2rem, 12.5vw, 3rem); }
+  .pb-nav { position: static; transform: none; margin-top: 1.25rem; padding: 0; }
+  .dg-lb-hint { display: none; }
+}
+
+@media (max-width: 359px) {
+  .dg-title { font-size: 2.1rem; }
+  .pb-btn { width: 2.4rem; height: 2.4rem; }
+}

@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../VIDEOS"
+		},
+		{
+			"path": "../../DESIGN GRAPHIQUE"
+		}
+	],
+	"settings": {
+		"github.copilot.chat.codesearch.enabled": true
+	}
+}
