@@ -12,9 +12,21 @@
   --color-blue-electric: #4a90ff;
   --color-white: #f5f5f5;
   --color-gray: #8a8a8a;
-  --font-display: 'Space Grotesk', 'Inter', sans-serif;
-  --font-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  /* --- Typographie : Poppins, famille unique du portfolio --- */
+  --font-primary: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: var(--font-primary);
+  --font-body: var(--font-primary);
+  /* Conservé pour compatibilité : les compteurs utilisaient la mono,
+     ils doivent maintenant suivre la famille principale. */
+  --font-mono: var(--font-primary);
+
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
 }
 
 /* ============ RESET ============ */
@@ -28,7 +40,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', 'Space Grotesk', sans-serif;
+  font-family: var(--font-primary);
   background: var(--color-black);
   color: var(--color-white);
   -webkit-font-smoothing: antialiased;
@@ -36,10 +48,136 @@ body {
   overflow-x: hidden;
 }
 
+/* ============ POPPINS PARTOUT ============
+   Le reset de Tailwind (CDN) déclare sa propre pile sur `html` et
+   l'injecte après cette feuille : on repasse donc par `html body`,
+   de spécificité supérieure, pour verrouiller la famille unique.
+   Les icônes Font Awesome gardent leur propre police grâce à
+   `.fa, .fas, .far, .fab, .fal, .fad, .fat`.                */
+html body,
+html body button,
+html body input,
+html body textarea,
+html body select,
+html body option,
+html body a,
+html body p,
+html body span,
+html body div,
+html body section,
+html body article,
+html body header,
+html body footer,
+html body nav,
+html body main,
+html body ul,
+html body ol,
+html body li,
+html body label,
+html body strong,
+html body em,
+html body small,
+html body figcaption,
+html body blockquote,
+html body h1,
+html body h2,
+html body h3,
+html body h4,
+html body h5,
+html body h6,
+html body th,
+html body td {
+  font-family: var(--font-primary);
+}
+
+/* Les utilitaires Tailwind `font-*` ne doivent pas réintroduire
+   une autre famille : on les neutralise au profit de Poppins. */
+html body .font-sans,
+html body .font-mono,
+html body .font-serif,
+html body .font-display {
+  font-family: var(--font-primary) !important;
+}
+
+/* Poppins s'arrête à 800 dans notre chargement : `font-black` (900)
+   et les `font-weight: 900` manuels sont ramenés sur l'ExtraBold
+   réel, sinon le navigateur simule une graisse floue. */
+html body .font-black {
+  font-weight: var(--font-weight-extrabold);
+}
+
+/* Poppins est plus large qu'Inter : une chaîne sans espace (email,
+   téléphone, URL) peut dépasser la piste `auto` d'une grille et la
+   faire déborder. `anywhere` — et non `break-word` — réduit aussi la
+   contribution min-content, ce qui laisse la piste se contracter.
+   Sans effet sur les textes qui tiennent normalement. */
+body {
+  overflow-wrap: anywhere;
+}
+
+/* Hiérarchie de référence (spec §5). Les classes de titre existantes
+   déclarent déjà leur poids et continuent de primer sur ces valeurs. */
+h1 {
+  font-weight: var(--font-weight-extrabold);
+}
+h2 {
+  font-weight: var(--font-weight-bold);
+}
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--font-weight-semibold);
+}
+
 /* ============ TYPOGRAPHIE ============ */
 .font-display {
-  font-family: 'Space Grotesk', 'Inter', sans-serif;
-  letter-spacing: -0.02em;
+  font-family: var(--font-primary);
+  /* Poppins est géométrique et plus large qu'Inter : un tracking
+     négatif reste nécessaire sur les grands titres, mais modéré. */
+  letter-spacing: -0.015em;
+}
+
+/* --- Recalibrage sur petits écrans (spec §9 / §10) ---
+   Les titres de section partaient d'un `text-4xl` fixe (36px) calibré
+   sur Inter. En Poppins 800, « COMPÉTENCES. » dépasse la largeur utile
+   sous 400px. On rend la taille fluide et bornée : la typo respire,
+   aucun titre ne déborde ni ne se casse au milieu d'un mot. */
+@media (max-width: 400px) {
+  html body h1.font-display,
+  html body h2.font-display,
+  html body .dg-title {
+    font-size: min(2.25rem, 8.2vw);
+  }
+}
+
+/* --- Micro-textes : tracking borné (spec §12) ---
+   Les libellés majuscules d'origine saturaient entre 0.20em et 0.42em.
+   Poppins étant déjà une police large, ces valeurs dispersaient
+   les mots. On ramène tous les libellés dans la fourchette
+   0.08em–0.18em demandée, en conservant leurs graisses et leur casse. */
+html body .dg-eyebrow,
+html body .hro-index,
+html body .hro-role,
+html body .hro-label,
+html body .hro-portrait-tag,
+html body .dg-flash,
+html body .dg-badge,
+html body .dg-motto,
+html body .dg-sign-text,
+html body .dg-lb-kicker,
+html body .dg-foot-note,
+html body .dg-view,
+html body .dg-view-label,
+html body .dg-view-arrow,
+html body .pbs-count-label,
+html body .pbs-count-value,
+html body .pbs-swipe,
+html body .wpl-aside-label,
+html body .wpl-count,
+html body .wpl-count-sep,
+html body [class*='tracking-[0.3em]'] {
+  letter-spacing: 0.16em;
 }
 
 /* ============ SCROLLBAR ============ */
@@ -171,7 +309,7 @@ body {
   z-index: -1;
   font-family: var(--font-display);
   font-size: clamp(16rem, 42vw, 34rem);
-  font-weight: 900;
+  font-weight: var(--font-weight-extrabold);
   line-height: 0.78;
   color: transparent;
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
@@ -302,9 +440,9 @@ body {
 .hro-count {
   font-family: var(--font-display);
   font-size: clamp(2.6rem, 5vw, 4rem);
-  font-weight: 900;
+  font-weight: var(--font-weight-extrabold);
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   color: var(--hro-white);
 }
 .hro-count-rule {
@@ -387,9 +525,9 @@ body {
   margin: 0;
   font-family: var(--font-display);
   font-size: clamp(3.1rem, 7vw, 6.2rem);
-  font-weight: 900;
+  font-weight: var(--font-weight-extrabold);
   line-height: 0.86;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.025em;
   text-transform: uppercase;
   color: #fff;
   animation: hro-slide 0.7s cubic-bezier(0.2, 0.7, 0.3, 1) 0.48s both;

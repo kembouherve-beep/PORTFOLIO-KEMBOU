@@ -14,14 +14,22 @@ export const renderer = jsxRenderer(({ children }) => {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
 
-        {/* Google Fonts — Typographies premium */}
+        {/* Google Fonts — Poppins, unique famille du portfolio.
+            Un seul chargement : les 6 graisses réellement utilisées. */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
 
         {/* Tailwind CSS */}
         <script src="https://cdn.tailwindcss.com"></script>
+        {/* Aligne le reset et les utilitaires Tailwind sur Poppins,
+            pour qu'aucune famille concurrente ne ressurgisse. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `tailwind.config={theme:{extend:{fontFamily:{sans:['Poppins','sans-serif'],display:['Poppins','sans-serif'],mono:['Poppins','sans-serif'],serif:['Poppins','sans-serif']}}}}`,
+          }}
+        />
 
         {/* Font Awesome */}
         <link

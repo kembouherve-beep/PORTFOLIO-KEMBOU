@@ -1,1 +1,5 @@
-h1 { font-family: Arial, Helvetica, sans-serif; }
+/* Fichier non référencé par le renderer (la feuille active est
+   /static/css/style.css). Conservé pour cohérence : plus d'Arial. */
+h1 {
+  font-family: 'Poppins', sans-serif;
+}
