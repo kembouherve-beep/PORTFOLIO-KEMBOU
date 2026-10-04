@@ -7,8 +7,8 @@ export const IDENTITY = {
   slogan: 'Je transforme vos idées en images qui racontent.',
   yearsExperience: 10,
   projectsCount: 500,
-  portrait: '/static/images/kembou-2.jpg',
-  heroImage: '/static/images/kembou-hero.jpg',
+  portrait: '/static/images/kembou-section.png',
+  heroImage: '/static/images/kembou-section.png',
   bio: `Professionnel de l'image et de la narration visuelle, KEMBOU accompagne les marques, entreprises, institutions et créateurs dans la conception et la réalisation de contenus audiovisuels professionnels. Son expertise couvre le tournage, le montage vidéo, la post-production, le motion design, l'habillage audiovisuel et la création de contenus numériques.`,
   professions: [
     'Technicien supérieur en audiovisuel et photographie',
