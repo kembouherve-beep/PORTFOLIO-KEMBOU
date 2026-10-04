@@ -20,7 +20,7 @@ const app = new Hono()
 app.use(renderer)
 
 // ==========================================================
-// API â€” Endpoints JSON (permet d'utiliser le portfolio comme headless)
+// API — Endpoints JSON (permet d'utiliser le portfolio comme headless)
 // ==========================================================
 app.get('/api/identity', (c) => c.json(IDENTITY))
 app.get('/api/skills', (c) => c.json(SKILLS))
@@ -43,7 +43,7 @@ app.get('/api/tools', (c) => c.json(TOOLS))
 app.get('/', (c) => {
   return c.render(
     <>
-      {/* ============ CURSEUR PERSONNALISÃ‰ ============ */}
+      {/* ============ CURSEUR PERSONNALISÉ ============ */}
       <div id="cursor-dot" class="hidden md:block fixed w-2 h-2 bg-amber-400 rounded-full pointer-events-none z-[9999] mix-blend-difference transition-transform duration-150"></div>
       <div id="cursor-ring" class="hidden md:block fixed w-10 h-10 border border-amber-400/50 rounded-full pointer-events-none z-[9998] transition-all duration-300"></div>
 
@@ -108,7 +108,7 @@ function Navigation() {
           href="#contact"
           class="hidden lg:inline-flex items-center gap-2 px-5 py-2 rounded-full bg-amber-400 text-black text-xs font-semibold tracking-wider hover:bg-white transition-all"
         >
-          DÃ‰MARRER
+          DÉMARRER
           <i class="fas fa-arrow-right text-[10px]"></i>
         </a>
 
@@ -141,15 +141,15 @@ function Navigation() {
 function HeroSection() {
   return (
     <section id="accueil" class="hro">
-      {/* Fond : dÃ©gradÃ© radial, grille technique, halos orange discrets */}
+      {/* Fond : dégradé radial, grille technique, halos orange discrets */}
       <div class="hro-veil" aria-hidden="true" />
-      {/* Mention dÃ©corative, presque invisible */}
+      {/* Mention décorative, presque invisible */}
       <span class="hro-ghost" aria-hidden="true">01</span>
 
       <div class="hro-card" data-bento>
-        {/* ---------- 01 â€” ACCUEIL + statut ---------- */}
+        {/* ---------- 01 — ACCUEIL + statut ---------- */}
         <div class="hro-eyebrow">
-          <span class="hro-index">01 â€” Accueil</span>
+          <span class="hro-index">01 — Accueil</span>
           <span class="hro-status">
             <i class="hro-status-dot" aria-hidden="true" />
             Disponible pour mission
@@ -164,7 +164,7 @@ function HeroSection() {
               <strong class="hro-value hro-value-sm">{IDENTITY.role}</strong>
             </div>
             <div class="hro-field">
-              <span class="hro-label">ExpÃ©rience</span>
+              <span class="hro-label">Expérience</span>
               <strong class="hro-value">+{IDENTITY.yearsExperience} ans</strong>
             </div>
           </div>
@@ -182,7 +182,7 @@ function HeroSection() {
           <div class="hro-portrait-media">
             <img
               src={IDENTITY.heroImage}
-              alt="KEMBOU â€” Designer et monteur vidÃ©o, en studio de montage"
+              alt="KEMBOU — Designer et monteur vidéo, en studio de montage"
               class="hro-portrait-img bento-portrait-img"
               fetchpriority="high"
               decoding="async"
@@ -211,7 +211,7 @@ function HeroSection() {
         </div>
       </div>
 
-      <a href="#profil" class="hro-scroll" aria-label="Aller Ã  la section profil">
+      <a href="#profil" class="hro-scroll" aria-label="Aller à la section profil">
         <span>SCROLL</span>
         <span class="hro-scroll-line hero-scroll-line" aria-hidden="true" />
       </a>
@@ -229,7 +229,7 @@ function ProfileSection() {
         {/* Titre section */}
         <div class="mb-16 md:mb-20">
           <div class="flex items-center gap-4 mb-4">
-            <span class="text-xs tracking-[0.4em] text-amber-400">02 â€” PROFIL</span>
+            <span class="text-xs tracking-[0.4em] text-amber-400">02 — PROFIL</span>
             <div class="h-[1px] flex-1 max-w-24 bg-amber-400/30"></div>
           </div>
           <h2 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold reveal-text">
@@ -273,7 +273,7 @@ function ProfileSection() {
               </p>
             </div>
 
-            {/* RÃ´les */}
+            {/* Rôles */}
             <div class="grid sm:grid-cols-2 gap-3 pt-4">
               {IDENTITY.professions.map((prof, i) => (
                 <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/[0.03] border border-white/5 hover:border-amber-400/30 transition-all">
@@ -310,15 +310,15 @@ function SkillsSection() {
         <div class="mb-16 md:mb-20 flex items-end justify-between flex-wrap gap-6">
           <div>
             <div class="flex items-center gap-4 mb-4">
-              <span class="text-xs tracking-[0.4em] text-amber-400">04 â€” EXPERTISE</span>
+              <span class="text-xs tracking-[0.4em] text-amber-400">04 — EXPERTISE</span>
               <div class="h-[1px] w-24 bg-amber-400/30"></div>
             </div>
             <h2 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold">
-              COMPÃ‰TENCES<span class="text-amber-400">.</span>
+              COMPÉTENCES<span class="text-amber-400">.</span>
             </h2>
           </div>
           <p class="text-white/50 text-sm max-w-md leading-relaxed">
-            5 domaines d'expertise complÃ©mentaires au service de vos projets audiovisuels et digitaux.
+            5 domaines d'expertise complémentaires au service de vos projets audiovisuels et digitaux.
           </p>
         </div>
 
@@ -341,7 +341,7 @@ function SkillsSection() {
                     {skill.title}
                   </h3>
                   <p class="text-sm text-white/60 italic leading-relaxed">
-                    Â« {skill.description} Â»
+                    « {skill.description} »
                   </p>
                 </div>
 
@@ -364,15 +364,15 @@ function SkillsSection() {
 }
 
 // ==========================================================
-//  04 â€” TRAVAUX DE RÃ‰FÃ‰RENCE
+//  04 — TRAVAUX DE RÉFÉRENCE
 //  Lecteur Wistia officiel (composant Aurora) + playlist de 15
-//  vidÃ©os. Les donnÃ©es viennent de src/wistia.ts : titres,
-//  durÃ©es et vignettes sont ceux de Wistia â€” rien n'est inventÃ©.
-//  Aucune vidÃ©o n'est stockÃ©e localement : le lecteur n'est
-//  chargÃ© qu'au premier clic (public/static/js/playlist.js).
+//  vidéos. Les données viennent de src/wistia.ts : titres,
+//  durées et vignettes sont ceux de Wistia — rien n'est inventé.
+//  Aucune vidéo n'est stockée localement : le lecteur n'est
+//  chargé qu'au premier clic (public/static/js/playlist.js).
 // ==========================================================
 
-/** 04 â€” TRAVAUX DE RÃ‰FÃ‰RENCE â€” lecteur Wistia et playlist. */
+/** 04 — TRAVAUX DE RÉFÉRENCE — lecteur Wistia et playlist. */
 function ReferenceWorksSection() {
   if (WISTIA_VIDEOS.length === 0) return null
   const first = WISTIA_VIDEOS[0]
@@ -385,17 +385,17 @@ function ReferenceWorksSection() {
       <div class="absolute bottom-1/4 left-0 w-96 h-96 bg-sky-500/10 rounded-full blur-[120px]"></div>
 
       <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-10">
-        {/* ---------- EN-TÃŠTE ---------- */}
+        {/* ---------- EN-TÊTE ---------- */}
         <div class="mb-12 md:mb-16">
           <div class="flex items-center gap-4 mb-4">
-            <span class="text-xs tracking-[0.4em] text-amber-400">04 â€” TRAVAUX DE RÃ‰FÃ‰RENCE</span>
+            <span class="text-xs tracking-[0.4em] text-amber-400">04 — TRAVAUX DE RÉFÉRENCE</span>
             <div class="h-px w-24 bg-amber-400/30"></div>
           </div>
           <h2 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold">
-            PROJETS VIDÃ‰O<span class="text-amber-400">.</span>
+            PROJETS VIDÉO<span class="text-amber-400">.</span>
           </h2>
           <p class="text-white/50 text-sm md:text-base leading-relaxed mt-6 max-w-2xl">
-            Une sÃ©lection de films montÃ©s et post-produits, lus directement en
+            Une sélection de films montés et post-produits, lus directement en
             ligne depuis le lecteur Wistia.
           </p>
         </div>
@@ -405,13 +405,13 @@ function ReferenceWorksSection() {
           {/* ---------- LECTEUR ---------- */}
           <div class="wpl-stage-col">
             <div class="wpl-stage" data-wpl-stage>
-              {/* AperÃ§u avant lecture : vignette Wistia. Au premier clic,
+              {/* Aperçu avant lecture : vignette Wistia. Au premier clic,
                   public/static/js/playlist.js y installe le lecteur officiel
-                  <wistia-player media-id="â€¦"> Ã  la place. */}
+                  <wistia-player media-id="…"> à la place. */}
               <img
                 class="wpl-stage-poster"
                 src={wistiaThumb(first, 640, 360)}
-                alt={`${first.title} â€” aperÃ§u de la vidÃ©o`}
+                alt={`${first.title} — aperçu de la vidéo`}
                 loading="lazy"
                 decoding="async"
               />
@@ -428,11 +428,11 @@ function ReferenceWorksSection() {
               </p>
               <h3 class="wpl-title" data-wpl-title>{first.title}</h3>
               <div class="wpl-nav">
-                <button type="button" class="wpl-nav-btn" data-wpl-prev aria-label="VidÃ©o prÃ©cÃ©dente">
+                <button type="button" class="wpl-nav-btn" data-wpl-prev aria-label="Vidéo précédente">
                   <i class="fas fa-chevron-left"></i>
-                  <span>PrÃ©cÃ©dente</span>
+                  <span>Précédente</span>
                 </button>
-                <button type="button" class="wpl-nav-btn" data-wpl-next aria-label="VidÃ©o suivante">
+                <button type="button" class="wpl-nav-btn" data-wpl-next aria-label="Vidéo suivante">
                   <span>Suivante</span>
                   <i class="fas fa-chevron-right"></i>
                 </button>
@@ -441,10 +441,10 @@ function ReferenceWorksSection() {
           </div>
 
           {/* ---------- PLAYLIST ---------- */}
-          <aside class="wpl-aside" aria-label="Playlist des travaux vidÃ©o">
+          <aside class="wpl-aside" aria-label="Playlist des travaux vidéo">
             <div class="wpl-aside-head">
               <span class="wpl-aside-label">Playlist</span>
-              <span class="wpl-aside-total">{WISTIA_VIDEO_COUNT} vidÃ©os</span>
+              <span class="wpl-aside-total">{WISTIA_VIDEO_COUNT} vidéos</span>
             </div>
             <ol class="wpl-list" data-wpl-list>
               {WISTIA_VIDEOS.map((v, i) => (
@@ -794,11 +794,11 @@ function ExperienceSection() {
       <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-10">
         <div class="mb-16 md:mb-20">
           <div class="flex items-center gap-4 mb-4">
-            <span class="text-xs tracking-[0.4em] text-amber-400">06 â€” PARCOURS</span>
+            <span class="text-xs tracking-[0.4em] text-amber-400">06 — PARCOURS</span>
             <div class="h-[1px] w-24 bg-amber-400/30"></div>
           </div>
           <h2 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold">
-            EXPÃ‰RIENCE<span class="text-amber-400">.</span>
+            EXPÉRIENCE<span class="text-amber-400">.</span>
           </h2>
         </div>
 
@@ -838,7 +838,7 @@ function ExperienceSection() {
                   </div>
                 </div>
 
-                {/* Espace opposÃ© */}
+                {/* Espace opposé */}
                 <div class="hidden md:block md:w-1/2"></div>
               </div>
             ))}
@@ -858,14 +858,14 @@ function ToolsSection() {
         <div class="mb-16 md:mb-20 text-center max-w-3xl mx-auto">
           <div class="flex items-center gap-4 mb-4 justify-center">
             <div class="h-[1px] w-16 bg-amber-400/30"></div>
-            <span class="text-xs tracking-[0.4em] text-amber-400">07 â€” STACK</span>
+            <span class="text-xs tracking-[0.4em] text-amber-400">07 — STACK</span>
             <div class="h-[1px] w-16 bg-amber-400/30"></div>
           </div>
           <h2 class="font-display text-4xl md:text-6xl font-bold mb-4">
             OUTILS & <span class="text-amber-400">TECHNOLOGIES</span>
           </h2>
           <p class="text-white/50 text-sm leading-relaxed">
-            Une maÃ®trise complÃ¨te des outils professionnels de post-production, motion design et crÃ©ation digitale.
+            Une maîtrise complète des outils professionnels de post-production, motion design et création digitale.
           </p>
         </div>
 
@@ -897,11 +897,11 @@ function ProcessSection() {
       <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-10">
         <div class="mb-16 md:mb-20">
           <div class="flex items-center gap-4 mb-4">
-            <span class="text-xs tracking-[0.4em] text-amber-400">08 â€” MÃ‰THODOLOGIE</span>
+            <span class="text-xs tracking-[0.4em] text-amber-400">08 — MÉTHODOLOGIE</span>
             <div class="h-[1px] w-24 bg-amber-400/30"></div>
           </div>
           <h2 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold">
-            MA <span class="text-amber-400">MÃ‰THODE</span>
+            MA <span class="text-amber-400">MÉTHODE</span>
           </h2>
         </div>
 
@@ -930,7 +930,7 @@ function ProcessSection() {
                     {step.title}
                   </h3>
                   <p class="text-sm text-amber-400/80 italic">
-                    Â« {step.description} Â»
+                    « {step.description} »
                   </p>
                   <p class="text-xs text-white/50 leading-relaxed pt-2 border-t border-white/10">
                     {step.detail}
@@ -955,17 +955,17 @@ function ContactSection() {
         <div class="text-center space-y-8 mb-16">
           <div class="flex items-center gap-4 justify-center">
             <div class="h-[1px] w-16 bg-amber-400/30"></div>
-            <span class="text-xs tracking-[0.4em] text-amber-400">09 â€” COLLABORATION</span>
+            <span class="text-xs tracking-[0.4em] text-amber-400">09 — COLLABORATION</span>
             <div class="h-[1px] w-16 bg-amber-400/30"></div>
           </div>
 
           <h2 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-none">
             UN PROJET<br />
-            <span class="text-amber-400 italic font-light">en tÃªte ?</span>
+            <span class="text-amber-400 italic font-light">en tête ?</span>
           </h2>
 
           <p class="text-white/60 text-lg md:text-xl italic max-w-2xl mx-auto">
-            Â« Parlons de votre prochaine histoire visuelle. Â»
+            « Parlons de votre prochaine histoire visuelle. »
           </p>
 
           <div class="flex flex-wrap justify-center gap-4 pt-4">
@@ -973,19 +973,19 @@ function ContactSection() {
               href={`mailto:${IDENTITY.contact.email}`}
               class="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-amber-400 text-black font-semibold tracking-widest text-sm hover:bg-white transition-all"
             >
-              DÃ‰MARRER UN PROJET
+              DÉMARRER UN PROJET
               <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
             </a>
             <a
               href="#projets"
               class="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-white/20 text-white font-semibold tracking-widest text-sm hover:border-amber-400 hover:text-amber-400 transition-all"
             >
-              VOIR MES RÃ‰ALISATIONS
+              VOIR MES RÉALISATIONS
             </a>
           </div>
         </div>
 
-        {/* CoordonnÃ©es */}
+        {/* Coordonnées */}
         <div class="grid md:grid-cols-2 gap-6 pt-12 border-t border-white/10">
           {/* Directs */}
           <div class="space-y-4">
@@ -1006,7 +1006,7 @@ function ContactSection() {
                   <i class="fas fa-phone text-amber-400"></i>
                 </div>
                 <div class="flex-1">
-                  <p class="text-[10px] tracking-widest text-white/40 uppercase">TÃ©lÃ©phone</p>
+                  <p class="text-[10px] tracking-widest text-white/40 uppercase">Téléphone</p>
                   <p class="text-sm text-white group-hover:text-amber-400 transition-colors">{IDENTITY.contact.phone}</p>
                 </div>
               </a>
@@ -1015,7 +1015,7 @@ function ContactSection() {
                   <i class="fas fa-mobile-screen text-amber-400"></i>
                 </div>
                 <div class="flex-1">
-                  <p class="text-[10px] tracking-widest text-white/40 uppercase">TÃ©lÃ©phone 2</p>
+                  <p class="text-[10px] tracking-widest text-white/40 uppercase">Téléphone 2</p>
                   <p class="text-sm text-white group-hover:text-amber-400 transition-colors">{IDENTITY.contact.phoneSecondary}</p>
                 </div>
               </a>
@@ -1040,9 +1040,9 @@ function ContactSection() {
             </div>
           </div>
 
-          {/* RÃ©seaux */}
+          {/* Réseaux */}
           <div class="space-y-4">
-            <h3 class="text-xs tracking-[0.3em] text-amber-400 uppercase">RÃ©seaux sociaux</h3>
+            <h3 class="text-xs tracking-[0.3em] text-amber-400 uppercase">Réseaux sociaux</h3>
             <div class="grid grid-cols-2 gap-3">
               <a href={IDENTITY.contact.linkedin} target="_blank" rel="noopener noreferrer" class="group flex items-center gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-amber-400/40 transition-all">
                 <i class="fab fa-linkedin text-blue-400 text-xl"></i>
@@ -1075,7 +1075,7 @@ function Footer() {
 
       <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-10">
         <div class="grid md:grid-cols-3 gap-12 mb-12">
-          {/* IdentitÃ© */}
+          {/* Identité */}
           <div class="space-y-4">
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
@@ -1083,11 +1083,11 @@ function Footer() {
               </div>
               <div>
                 <p class="font-display font-bold text-lg">KEMBOU</p>
-                <p class="text-[10px] tracking-widest text-white/50">VIDÃ‰ASTE & MONTEUR VIDÃ‰O</p>
+                <p class="text-[10px] tracking-widest text-white/50">VIDÉASTE & MONTEUR VIDÉO</p>
               </div>
             </div>
             <p class="text-sm text-white/60 italic leading-relaxed max-w-xs">
-              Â« Des images pensÃ©es pour raconter, transmettre et marquer. Â»
+              « Des images pensées pour raconter, transmettre et marquer. »
             </p>
           </div>
 
@@ -1142,10 +1142,10 @@ function Footer() {
 
         <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p class="text-xs text-white/40">
-            Â© 2026 KEMBOU â€” Tous droits rÃ©servÃ©s.
+            © 2026 KEMBOU — Tous droits réservés.
           </p>
           <p class="text-xs text-white/40">
-            Portfolio 2026 Â· VidÃ©aste & Monteur VidÃ©o
+            Portfolio 2026 · Vidéaste & Monteur Vidéo
           </p>
         </div>
       </div>
