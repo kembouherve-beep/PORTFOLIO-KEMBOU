@@ -10,9 +10,9 @@ import {
   getWistiaVideoById, wistiaNumber, wistiaPageUrl, wistiaThumb,
 } from './wistia'
 import {
-  PRESSBOOK_TITLE, PRESSBOOK_YEAR, PRESSBOOK_PAGES, PRESSBOOK_SHEETS,
-  PRESSBOOK_PAGE_COUNT, PRESSBOOK_SPREADS, PRESSBOOK_SUMMARY,
-  pressbookSrc, type PressbookPage, type PressbookRes
+  PRESSBOOK_TITLE, PRESSBOOK_YEAR, PRESSBOOK_PAGES,
+  PRESSBOOK_PAGE_COUNT, PRESSBOOK_SUMMARY, pressbookSrcList,
+  type PressbookRes
 } from './pressbook'
 
 const app = new Hono()
@@ -20,7 +20,7 @@ const app = new Hono()
 app.use(renderer)
 
 // ==========================================================
-// API — Endpoints JSON (permet d'utiliser le portfolio comme headless)
+// API â€” Endpoints JSON (permet d'utiliser le portfolio comme headless)
 // ==========================================================
 app.get('/api/identity', (c) => c.json(IDENTITY))
 app.get('/api/skills', (c) => c.json(SKILLS))
@@ -43,7 +43,7 @@ app.get('/api/tools', (c) => c.json(TOOLS))
 app.get('/', (c) => {
   return c.render(
     <>
-      {/* ============ CURSEUR PERSONNALISÉ ============ */}
+      {/* ============ CURSEUR PERSONNALISÃ‰ ============ */}
       <div id="cursor-dot" class="hidden md:block fixed w-2 h-2 bg-amber-400 rounded-full pointer-events-none z-[9999] mix-blend-difference transition-transform duration-150"></div>
       <div id="cursor-ring" class="hidden md:block fixed w-10 h-10 border border-amber-400/50 rounded-full pointer-events-none z-[9998] transition-all duration-300"></div>
 
@@ -108,7 +108,7 @@ function Navigation() {
           href="#contact"
           class="hidden lg:inline-flex items-center gap-2 px-5 py-2 rounded-full bg-amber-400 text-black text-xs font-semibold tracking-wider hover:bg-white transition-all"
         >
-          DÉMARRER
+          DÃ‰MARRER
           <i class="fas fa-arrow-right text-[10px]"></i>
         </a>
 
@@ -141,15 +141,15 @@ function Navigation() {
 function HeroSection() {
   return (
     <section id="accueil" class="hro">
-      {/* Fond : dégradé radial, grille technique, halos orange discrets */}
+      {/* Fond : dÃ©gradÃ© radial, grille technique, halos orange discrets */}
       <div class="hro-veil" aria-hidden="true" />
-      {/* Mention décorative, presque invisible */}
+      {/* Mention dÃ©corative, presque invisible */}
       <span class="hro-ghost" aria-hidden="true">01</span>
 
       <div class="hro-card" data-bento>
-        {/* ---------- 01 — ACCUEIL + statut ---------- */}
+        {/* ---------- 01 â€” ACCUEIL + statut ---------- */}
         <div class="hro-eyebrow">
-          <span class="hro-index">01 — Accueil</span>
+          <span class="hro-index">01 â€” Accueil</span>
           <span class="hro-status">
             <i class="hro-status-dot" aria-hidden="true" />
             Disponible pour mission
@@ -164,7 +164,7 @@ function HeroSection() {
               <strong class="hro-value hro-value-sm">{IDENTITY.role}</strong>
             </div>
             <div class="hro-field">
-              <span class="hro-label">Expérience</span>
+              <span class="hro-label">ExpÃ©rience</span>
               <strong class="hro-value">+{IDENTITY.yearsExperience} ans</strong>
             </div>
           </div>
@@ -182,7 +182,7 @@ function HeroSection() {
           <div class="hro-portrait-media">
             <img
               src={IDENTITY.heroImage}
-              alt="KEMBOU — Designer et monteur vidéo, en studio de montage"
+              alt="KEMBOU â€” Designer et monteur vidÃ©o, en studio de montage"
               class="hro-portrait-img bento-portrait-img"
               fetchpriority="high"
               decoding="async"
@@ -211,7 +211,7 @@ function HeroSection() {
         </div>
       </div>
 
-      <a href="#profil" class="hro-scroll" aria-label="Aller à la section profil">
+      <a href="#profil" class="hro-scroll" aria-label="Aller Ã  la section profil">
         <span>SCROLL</span>
         <span class="hro-scroll-line hero-scroll-line" aria-hidden="true" />
       </a>
@@ -229,7 +229,7 @@ function ProfileSection() {
         {/* Titre section */}
         <div class="mb-16 md:mb-20">
           <div class="flex items-center gap-4 mb-4">
-            <span class="text-xs tracking-[0.4em] text-amber-400">02 — PROFIL</span>
+            <span class="text-xs tracking-[0.4em] text-amber-400">02 â€” PROFIL</span>
             <div class="h-[1px] flex-1 max-w-24 bg-amber-400/30"></div>
           </div>
           <h2 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold reveal-text">
@@ -273,7 +273,7 @@ function ProfileSection() {
               </p>
             </div>
 
-            {/* Rôles */}
+            {/* RÃ´les */}
             <div class="grid sm:grid-cols-2 gap-3 pt-4">
               {IDENTITY.professions.map((prof, i) => (
                 <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/[0.03] border border-white/5 hover:border-amber-400/30 transition-all">
@@ -310,15 +310,15 @@ function SkillsSection() {
         <div class="mb-16 md:mb-20 flex items-end justify-between flex-wrap gap-6">
           <div>
             <div class="flex items-center gap-4 mb-4">
-              <span class="text-xs tracking-[0.4em] text-amber-400">04 — EXPERTISE</span>
+              <span class="text-xs tracking-[0.4em] text-amber-400">04 â€” EXPERTISE</span>
               <div class="h-[1px] w-24 bg-amber-400/30"></div>
             </div>
             <h2 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold">
-              COMPÉTENCES<span class="text-amber-400">.</span>
+              COMPÃ‰TENCES<span class="text-amber-400">.</span>
             </h2>
           </div>
           <p class="text-white/50 text-sm max-w-md leading-relaxed">
-            5 domaines d'expertise complémentaires au service de vos projets audiovisuels et digitaux.
+            5 domaines d'expertise complÃ©mentaires au service de vos projets audiovisuels et digitaux.
           </p>
         </div>
 
@@ -341,7 +341,7 @@ function SkillsSection() {
                     {skill.title}
                   </h3>
                   <p class="text-sm text-white/60 italic leading-relaxed">
-                    « {skill.description} »
+                    Â« {skill.description} Â»
                   </p>
                 </div>
 
@@ -364,15 +364,15 @@ function SkillsSection() {
 }
 
 // ==========================================================
-//  04 — TRAVAUX DE RÉFÉRENCE
+//  04 â€” TRAVAUX DE RÃ‰FÃ‰RENCE
 //  Lecteur Wistia officiel (composant Aurora) + playlist de 15
-//  vidéos. Les données viennent de src/wistia.ts : titres,
-//  durées et vignettes sont ceux de Wistia — rien n'est inventé.
-//  Aucune vidéo n'est stockée localement : le lecteur n'est
-//  chargé qu'au premier clic (public/static/js/playlist.js).
+//  vidÃ©os. Les donnÃ©es viennent de src/wistia.ts : titres,
+//  durÃ©es et vignettes sont ceux de Wistia â€” rien n'est inventÃ©.
+//  Aucune vidÃ©o n'est stockÃ©e localement : le lecteur n'est
+//  chargÃ© qu'au premier clic (public/static/js/playlist.js).
 // ==========================================================
 
-/** 04 — TRAVAUX DE RÉFÉRENCE — lecteur Wistia et playlist. */
+/** 04 â€” TRAVAUX DE RÃ‰FÃ‰RENCE â€” lecteur Wistia et playlist. */
 function ReferenceWorksSection() {
   if (WISTIA_VIDEOS.length === 0) return null
   const first = WISTIA_VIDEOS[0]
@@ -385,17 +385,17 @@ function ReferenceWorksSection() {
       <div class="absolute bottom-1/4 left-0 w-96 h-96 bg-sky-500/10 rounded-full blur-[120px]"></div>
 
       <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-10">
-        {/* ---------- EN-TÊTE ---------- */}
+        {/* ---------- EN-TÃŠTE ---------- */}
         <div class="mb-12 md:mb-16">
           <div class="flex items-center gap-4 mb-4">
-            <span class="text-xs tracking-[0.4em] text-amber-400">04 — TRAVAUX DE RÉFÉRENCE</span>
+            <span class="text-xs tracking-[0.4em] text-amber-400">04 â€” TRAVAUX DE RÃ‰FÃ‰RENCE</span>
             <div class="h-px w-24 bg-amber-400/30"></div>
           </div>
           <h2 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold">
-            PROJETS VIDÉO<span class="text-amber-400">.</span>
+            PROJETS VIDÃ‰O<span class="text-amber-400">.</span>
           </h2>
           <p class="text-white/50 text-sm md:text-base leading-relaxed mt-6 max-w-2xl">
-            Une sélection de films montés et post-produits, lus directement en
+            Une sÃ©lection de films montÃ©s et post-produits, lus directement en
             ligne depuis le lecteur Wistia.
           </p>
         </div>
@@ -405,13 +405,13 @@ function ReferenceWorksSection() {
           {/* ---------- LECTEUR ---------- */}
           <div class="wpl-stage-col">
             <div class="wpl-stage" data-wpl-stage>
-              {/* Aperçu avant lecture : vignette Wistia. Au premier clic,
+              {/* AperÃ§u avant lecture : vignette Wistia. Au premier clic,
                   public/static/js/playlist.js y installe le lecteur officiel
-                  <wistia-player media-id="…"> à la place. */}
+                  <wistia-player media-id="â€¦"> Ã  la place. */}
               <img
                 class="wpl-stage-poster"
                 src={wistiaThumb(first, 640, 360)}
-                alt={`${first.title} — aperçu de la vidéo`}
+                alt={`${first.title} â€” aperÃ§u de la vidÃ©o`}
                 loading="lazy"
                 decoding="async"
               />
@@ -428,11 +428,11 @@ function ReferenceWorksSection() {
               </p>
               <h3 class="wpl-title" data-wpl-title>{first.title}</h3>
               <div class="wpl-nav">
-                <button type="button" class="wpl-nav-btn" data-wpl-prev aria-label="Vidéo précédente">
+                <button type="button" class="wpl-nav-btn" data-wpl-prev aria-label="VidÃ©o prÃ©cÃ©dente">
                   <i class="fas fa-chevron-left"></i>
-                  <span>Précédente</span>
+                  <span>PrÃ©cÃ©dente</span>
                 </button>
-                <button type="button" class="wpl-nav-btn" data-wpl-next aria-label="Vidéo suivante">
+                <button type="button" class="wpl-nav-btn" data-wpl-next aria-label="VidÃ©o suivante">
                   <span>Suivante</span>
                   <i class="fas fa-chevron-right"></i>
                 </button>
@@ -441,10 +441,10 @@ function ReferenceWorksSection() {
           </div>
 
           {/* ---------- PLAYLIST ---------- */}
-          <aside class="wpl-aside" aria-label="Playlist des travaux vidéo">
+          <aside class="wpl-aside" aria-label="Playlist des travaux vidÃ©o">
             <div class="wpl-aside-head">
               <span class="wpl-aside-label">Playlist</span>
-              <span class="wpl-aside-total">{WISTIA_VIDEO_COUNT} vidéos</span>
+              <span class="wpl-aside-total">{WISTIA_VIDEO_COUNT} vidÃ©os</span>
             </div>
             <ol class="wpl-list" data-wpl-list>
               {WISTIA_VIDEOS.map((v, i) => (
@@ -489,148 +489,184 @@ function ReferenceWorksSection() {
   )
 }
 
+/** Nombre de cartes visibles dans la colonne de miniatures. */
+const PBS_THUMB_SLOTS = 7
+/** Cartes de marge au-dessus / en dessous de la miniature active. */
+const PBS_THUMB_PAD = 3
+
 /**
- * PRESSBOOK — livre interactif en 3D.
+ * PRESSBOOK — slider de cartes éditorial.
  *
- * Composant autonome et réutilisable : il ne rend que le livre, la
- * navigation et le compteur. L'état, le retournement, le swipe et le
- * chargement glissé des images sont gérés par public/static/js/pressbook.js.
+ * Une grande page au centre, les pages voisines en retrait de part et
+ * d'autre, une colonne de miniatures, un compteur et une navigation.
+ * Aucune notion de feuillet : c'est une présentation, pas un livre.
  *
- * `res` choisit la résolution des visuels ('card' dans la section,
- * 'full' dans la lightbox).
+ * Le composant ne rend que cinq cartes (fenêtre glissante autour de la
+ * page active) ; le contrôleur public/static/js/pressbook.js recycle ces
+ * cinq emplacements et n'hydrate que les pages proches. `data-srcs`
+ * porte la liste complète des sources de la résolution demandée.
+ *
+ * `res` choisit la résolution ('card' dans la section, 'full' dans la
+ * visionneuse plein écran).
  */
-function PressbookFlipbook({ res = 'card', id }: { res?: PressbookRes; id?: string }) {
+function PressbookSlider({
+  res = 'card',
+  id,
+  variant = 'section',
+}: {
+  res?: PressbookRes
+  id?: string
+  variant?: 'section' | 'viewer'
+}) {
   const pad = (n: number) => String(n).padStart(2, '0')
-  const img = (page: PressbookPage | null) =>
-    page ? pressbookSrc(page, res) : ''
+  const total = PRESSBOOK_PAGE_COUNT
+  const viewer = variant === 'viewer'
+  const srcs = pressbookSrcList(res)
+
+  // Page 0 au centre au chargement, page 1 à droite. Les trois autres
+  // emplacements sont des réservoirs que le contrôleur remplira ensuite.
+  const slots = [0, 1, null, null, null]
 
   return (
     <div
-      class="pb"
-      data-pressbook
-      data-spreads={PRESSBOOK_SPREADS}
-      data-mode="spread"
+      class={`pbs${viewer ? ' pbs--viewer' : ''}`}
+      data-pbs
+      data-variant={variant}
+      data-total={total}
+      data-srcs={JSON.stringify(srcs)}
+      data-alts={JSON.stringify(PRESSBOOK_PAGES.map((p) => p.alt))}
       id={id}
     >
-      <div class="pb-book">
-        <div class="pb-clip">
-          <div class="pb-stage" data-pb-stage>
-            {/* Pages de base : ce qui reste quand aucun feuillet ne tourne */}
-            <div class="pb-base pb-base--left" aria-hidden="true" />
+      {/* ---------- COMPTEUR + NAVIGATION ---------- */}
+      <div class="pbs-head">
+        <div class="pbs-count">
+          <span class="pbs-count-track" aria-hidden="true">
+            <span class="pbs-count-fill" data-pbs-fill />
+          </span>
+          <span class="pbs-count-value">
+            <span class="pbs-count-label">Page</span>
+            <b data-pbs-current>01</b>
+            <i aria-hidden="true">/</i>
+            <span data-pbs-total>{pad(total)}</span>
+          </span>
+        </div>
 
-            {/* Feuillets. Le feuillet 0 est la couverture : il porte aussi son
-                verso, sans quoi la double-page 01 resterait à moitié vide. */}
-            {PRESSBOOK_SHEETS.map((sheet) => (
-              <div
-                key={sheet.index}
-                class="pb-sheet"
-                data-pb-sheet
-                data-spread={sheet.spread}
-                {...(sheet.isCover
-                  ? { 'data-cover': '1', 'data-back': img(sheet.back) }
-                  : { 'data-front': img(sheet.front), 'data-back': img(sheet.back) })}
-              >
-                {/* Recto */}
-                <div class="pb-face pb-face--front">
-                  {sheet.isCover ? (
-                    <div class="pb-cover">
-                      <img
-                        class="pb-cover-img"
-                        src={img(sheet.front ?? PRESSBOOK_PAGES[0])}
-                        alt=""
-                        aria-hidden="true"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <span class="pb-cover-kicker">Pressbook</span>
-                      <span class="pb-cover-title">{PRESSBOOK_TITLE}</span>
-                      <span class="pb-cover-meta">
-                        {PRESSBOOK_YEAR} — {PRESSBOOK_PAGE_COUNT} pages
-                      </span>
-                    </div>
-                  ) : sheet.front ? (
-                    <img
-                      data-pb-img
-                      alt={sheet.front.alt}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  ) : null}
-                </div>
-
-                {/* Verso — le verso du dernier feuillet est un faux page. */}
-                <div class="pb-face pb-face--back">
-                  {!sheet.back ? (
-                    <div class="pb-endpaper" aria-hidden="true" />
-                  ) : (
-                    <img
-                      data-pb-img
-                      alt={sheet.back.alt}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  )}
-                </div>
-              </div>
-            ))}
-
-            {/* Ombres : projection au sol + reliure */}
-            <div class="pb-cast" aria-hidden="true" />
-            <div class="pb-spine" aria-hidden="true" />
-            <div class="pb-edge pb-edge--left" aria-hidden="true" />
-            <div class="pb-edge pb-edge--right" aria-hidden="true" />
-          </div>
-
-          {/* Zones cliquables : gauche = retour, droite = avance */}
+        <div class="pbs-nav">
           <button
             type="button"
-            class="pb-hit pb-hit--prev"
-            data-pb-hit="prev"
-            aria-label="Page précédente"
-          />
+            class="pbs-btn"
+            data-pbs-btn="prev"
+            aria-label="Projet précédent"
+          >
+            <i class="fas fa-arrow-left" aria-hidden="true" />
+          </button>
           <button
             type="button"
-            class="pb-hit pb-hit--next"
-            data-pb-hit="next"
-            aria-label="Page suivante"
-          />
+            class="pbs-btn"
+            data-pbs-btn="next"
+            aria-label="Projet suivant"
+          >
+            <i class="fas fa-arrow-right" aria-hidden="true" />
+          </button>
         </div>
       </div>
 
-      <div class="pb-nav">
-        <button
-          type="button"
-          class="pb-btn"
-          data-pb-btn="prev"
-          aria-label="Page précédente"
-        >
-          &#8592;
-        </button>
-        <button
-          type="button"
-          class="pb-btn"
-          data-pb-btn="next"
-          aria-label="Page suivante"
-        >
-          &#8594;
-        </button>
+      {/* ---------- SCÈNE ---------- */}
+      <div
+        class="pbs-stage"
+        data-pbs-stage
+        role="group"
+        aria-roledescription="carrousel"
+        aria-label={`${PRESSBOOK_TITLE} — pages`}
+      >
+        {slots.map((page, i) => {
+          const p = page == null ? null : PRESSBOOK_PAGES[page]
+          return (
+            <div
+              key={i}
+              class="pbs-card"
+              data-pbs-card={i}
+              data-page={page == null ? undefined : page}
+              aria-hidden={page === 0 ? undefined : 'true'}
+            >
+              <div class="pbs-shot">
+                <div class="pbs-par">
+                  <figure class="pbs-media">
+                    <img
+                      data-pbs-img
+                      /* Les trois premiers emplacements sont servis
+                         dans le HTML : la page affichée s'affiche sans
+                         attendre le script. */
+                      src={page != null && page < 3 ? srcs[page] : undefined}
+                      alt={p ? p.alt : ''}
+                      width={900}
+                      height={506}
+                      decoding="async"
+                    />
+                    <figcaption class="pbs-tag" aria-hidden="true">
+                      <b data-pbs-tag>{pad(page == null ? 0 : page + 1)}</b>
+                      <span>{PRESSBOOK_YEAR}</span>
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+
+        <span class="pbs-swipe" aria-hidden="true">
+          Glisser pour parcourir
+        </span>
       </div>
 
-      <span class="sr-only" aria-live="polite" data-pb-live>
-        Double-page {pad(1)} sur {PRESSBOOK_SPREADS}
-      </span>
-    </div>
-  )
-}
+      {/* ---------- MINIATURES ---------- */}
+      {!viewer && (
+        <div class="pbs-thumbs" data-pbs-thumbs>
+          <div class="pbs-track" data-pbs-track>
+            {/* Marges invisibles : elles permettent de centrer la miniature
+                active même sur les premières et dernières pages. */}
+            {Array.from({ length: PBS_THUMB_PAD }, (_, i) => (
+              <span class="pbs-pad" key={`pad-top-${i}`} aria-hidden="true" />
+            ))}
 
-/** Compteur de doubles-pages, alimenté par le flipbook. */
-function PressbookCounter() {
-  return (
-    <div class="dg-count" data-pb-counter>
-      <span class="dg-count-line" aria-hidden="true" />
-      <span class="dg-count-value">
-        <b data-pb-current>01</b> <span aria-hidden="true">/</span>{' '}
-        <span data-pb-total>{String(PRESSBOOK_SPREADS).padStart(2, '0')}</span>
+            {PRESSBOOK_PAGES.map((p, i) => (
+              <button
+                key={p.page}
+                type="button"
+                class="pbs-thumb"
+                data-pbs-thumb={i}
+                aria-label={`Sélectionner la page ${i + 1}`}
+                aria-current={i === 0 ? 'true' : undefined}
+                style={`--pbs-i:${i}`}
+              >
+                <span class="pbs-thumb-bar" aria-hidden="true" />
+                <span class="pbs-thumb-frame">
+                  <img
+                    data-pbs-thumb-img
+                    data-src={p.thumb}
+                    src={i < PBS_THUMB_SLOTS ? p.thumb : undefined}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    width={200}
+                    height={112}
+                  />
+                </span>
+                <span class="pbs-thumb-num" aria-hidden="true">
+                  {pad(i + 1)}
+                </span>
+              </button>
+            ))}
+
+            {Array.from({ length: PBS_THUMB_PAD }, (_, i) => (
+              <span class="pbs-pad" key={`pad-bot-${i}`} aria-hidden="true" />
+            ))}
+          </div>
+        </div>
+      )}
+
+      <span class="sr-only" aria-live="polite" data-pbs-live>
+        Page 01 sur {total}
       </span>
     </div>
   )
@@ -666,8 +702,8 @@ function DesignGraphiqueSection() {
 
             <p class="dg-desc dg-anim" data-dg-anim style="--dg-delay:300ms">
               Composition, mise en page et supports imprimés et numériques
-              conçus sur mesure pour valoriser votre image et amplifier votre
-              message.
+              conçus sur mesure pour valoriser votre image et amplifier
+              votre message.
             </p>
 
             <div class="dg-sign dg-anim" data-dg-anim style="--dg-delay:360ms">
@@ -691,14 +727,14 @@ function DesignGraphiqueSection() {
                 <span class="dg-badge">Print &amp; Digital</span>
               </div>
 
-              <div class="dg-anim" data-dg-anim style="--dg-delay:520ms">
-                <PressbookFlipbook res="card" />
-              </div>
+              <PressbookSlider res="card" />
 
               <div class="dg-card-foot">
-                <PressbookCounter />
+                <p class="dg-foot-note">
+                  {PRESSBOOK_PAGE_COUNT} pages · Version numérique &amp; imprimée
+                </p>
 
-                <button type="button" class="dg-view" data-dg-open>
+                <button type="button" class="dg-view" data-dg-open aria-label="Ouvrir le projet">
                   <i class="fas fa-eye" aria-hidden="true" />
                   <span class="dg-view-label">Voir le projet complet</span>
                   <i class="dg-view-arrow" aria-hidden="true">
@@ -711,7 +747,7 @@ function DesignGraphiqueSection() {
         </div>
       </section>
 
-      {/* ---------- LIGHTBOX PLEIN ÉCRAN ---------- */}
+      {/* ---------- VISIONNEUSE PLEIN ÉCRAN ---------- */}
       <div
         class="dg-lightbox"
         data-dg-lightbox
@@ -730,20 +766,17 @@ function DesignGraphiqueSection() {
               type="button"
               class="dg-lb-close"
               data-dg-close
-              aria-label="Fermer le pressbook"
+              aria-label="Fermer la visionneuse"
             >
               <i class="fas fa-times" aria-hidden="true" />
             </button>
           </div>
 
-          <div data-pb-scope>
-            <PressbookFlipbook res="full" />
-          </div>
+          <PressbookSlider res="full" variant="viewer" />
 
           <div class="dg-lb-foot">
-            <PressbookCounter />
             <p class="dg-lb-hint">
-              &#8592; &#8594; pour feuilleter — Échap pour fermer
+              &#8592; &#8594; pour parcourir — glissez sur mobile — Échap pour fermer
             </p>
           </div>
         </div>
@@ -761,11 +794,11 @@ function ExperienceSection() {
       <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-10">
         <div class="mb-16 md:mb-20">
           <div class="flex items-center gap-4 mb-4">
-            <span class="text-xs tracking-[0.4em] text-amber-400">06 — PARCOURS</span>
+            <span class="text-xs tracking-[0.4em] text-amber-400">06 â€” PARCOURS</span>
             <div class="h-[1px] w-24 bg-amber-400/30"></div>
           </div>
           <h2 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold">
-            EXPÉRIENCE<span class="text-amber-400">.</span>
+            EXPÃ‰RIENCE<span class="text-amber-400">.</span>
           </h2>
         </div>
 
@@ -805,7 +838,7 @@ function ExperienceSection() {
                   </div>
                 </div>
 
-                {/* Espace opposé */}
+                {/* Espace opposÃ© */}
                 <div class="hidden md:block md:w-1/2"></div>
               </div>
             ))}
@@ -825,14 +858,14 @@ function ToolsSection() {
         <div class="mb-16 md:mb-20 text-center max-w-3xl mx-auto">
           <div class="flex items-center gap-4 mb-4 justify-center">
             <div class="h-[1px] w-16 bg-amber-400/30"></div>
-            <span class="text-xs tracking-[0.4em] text-amber-400">07 — STACK</span>
+            <span class="text-xs tracking-[0.4em] text-amber-400">07 â€” STACK</span>
             <div class="h-[1px] w-16 bg-amber-400/30"></div>
           </div>
           <h2 class="font-display text-4xl md:text-6xl font-bold mb-4">
             OUTILS & <span class="text-amber-400">TECHNOLOGIES</span>
           </h2>
           <p class="text-white/50 text-sm leading-relaxed">
-            Une maîtrise complète des outils professionnels de post-production, motion design et création digitale.
+            Une maÃ®trise complÃ¨te des outils professionnels de post-production, motion design et crÃ©ation digitale.
           </p>
         </div>
 
@@ -864,11 +897,11 @@ function ProcessSection() {
       <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-10">
         <div class="mb-16 md:mb-20">
           <div class="flex items-center gap-4 mb-4">
-            <span class="text-xs tracking-[0.4em] text-amber-400">08 — MÉTHODOLOGIE</span>
+            <span class="text-xs tracking-[0.4em] text-amber-400">08 â€” MÃ‰THODOLOGIE</span>
             <div class="h-[1px] w-24 bg-amber-400/30"></div>
           </div>
           <h2 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold">
-            MA <span class="text-amber-400">MÉTHODE</span>
+            MA <span class="text-amber-400">MÃ‰THODE</span>
           </h2>
         </div>
 
@@ -897,7 +930,7 @@ function ProcessSection() {
                     {step.title}
                   </h3>
                   <p class="text-sm text-amber-400/80 italic">
-                    « {step.description} »
+                    Â« {step.description} Â»
                   </p>
                   <p class="text-xs text-white/50 leading-relaxed pt-2 border-t border-white/10">
                     {step.detail}
@@ -922,17 +955,17 @@ function ContactSection() {
         <div class="text-center space-y-8 mb-16">
           <div class="flex items-center gap-4 justify-center">
             <div class="h-[1px] w-16 bg-amber-400/30"></div>
-            <span class="text-xs tracking-[0.4em] text-amber-400">09 — COLLABORATION</span>
+            <span class="text-xs tracking-[0.4em] text-amber-400">09 â€” COLLABORATION</span>
             <div class="h-[1px] w-16 bg-amber-400/30"></div>
           </div>
 
           <h2 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-none">
             UN PROJET<br />
-            <span class="text-amber-400 italic font-light">en tête ?</span>
+            <span class="text-amber-400 italic font-light">en tÃªte ?</span>
           </h2>
 
           <p class="text-white/60 text-lg md:text-xl italic max-w-2xl mx-auto">
-            « Parlons de votre prochaine histoire visuelle. »
+            Â« Parlons de votre prochaine histoire visuelle. Â»
           </p>
 
           <div class="flex flex-wrap justify-center gap-4 pt-4">
@@ -940,19 +973,19 @@ function ContactSection() {
               href={`mailto:${IDENTITY.contact.email}`}
               class="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-amber-400 text-black font-semibold tracking-widest text-sm hover:bg-white transition-all"
             >
-              DÉMARRER UN PROJET
+              DÃ‰MARRER UN PROJET
               <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
             </a>
             <a
               href="#projets"
               class="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-white/20 text-white font-semibold tracking-widest text-sm hover:border-amber-400 hover:text-amber-400 transition-all"
             >
-              VOIR MES RÉALISATIONS
+              VOIR MES RÃ‰ALISATIONS
             </a>
           </div>
         </div>
 
-        {/* Coordonnées */}
+        {/* CoordonnÃ©es */}
         <div class="grid md:grid-cols-2 gap-6 pt-12 border-t border-white/10">
           {/* Directs */}
           <div class="space-y-4">
@@ -973,7 +1006,7 @@ function ContactSection() {
                   <i class="fas fa-phone text-amber-400"></i>
                 </div>
                 <div class="flex-1">
-                  <p class="text-[10px] tracking-widest text-white/40 uppercase">Téléphone</p>
+                  <p class="text-[10px] tracking-widest text-white/40 uppercase">TÃ©lÃ©phone</p>
                   <p class="text-sm text-white group-hover:text-amber-400 transition-colors">{IDENTITY.contact.phone}</p>
                 </div>
               </a>
@@ -982,7 +1015,7 @@ function ContactSection() {
                   <i class="fas fa-mobile-screen text-amber-400"></i>
                 </div>
                 <div class="flex-1">
-                  <p class="text-[10px] tracking-widest text-white/40 uppercase">Téléphone 2</p>
+                  <p class="text-[10px] tracking-widest text-white/40 uppercase">TÃ©lÃ©phone 2</p>
                   <p class="text-sm text-white group-hover:text-amber-400 transition-colors">{IDENTITY.contact.phoneSecondary}</p>
                 </div>
               </a>
@@ -1007,9 +1040,9 @@ function ContactSection() {
             </div>
           </div>
 
-          {/* Réseaux */}
+          {/* RÃ©seaux */}
           <div class="space-y-4">
-            <h3 class="text-xs tracking-[0.3em] text-amber-400 uppercase">Réseaux sociaux</h3>
+            <h3 class="text-xs tracking-[0.3em] text-amber-400 uppercase">RÃ©seaux sociaux</h3>
             <div class="grid grid-cols-2 gap-3">
               <a href={IDENTITY.contact.linkedin} target="_blank" rel="noopener noreferrer" class="group flex items-center gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-amber-400/40 transition-all">
                 <i class="fab fa-linkedin text-blue-400 text-xl"></i>
@@ -1042,7 +1075,7 @@ function Footer() {
 
       <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-10">
         <div class="grid md:grid-cols-3 gap-12 mb-12">
-          {/* Identité */}
+          {/* IdentitÃ© */}
           <div class="space-y-4">
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
@@ -1050,11 +1083,11 @@ function Footer() {
               </div>
               <div>
                 <p class="font-display font-bold text-lg">KEMBOU</p>
-                <p class="text-[10px] tracking-widest text-white/50">VIDÉASTE & MONTEUR VIDÉO</p>
+                <p class="text-[10px] tracking-widest text-white/50">VIDÃ‰ASTE & MONTEUR VIDÃ‰O</p>
               </div>
             </div>
             <p class="text-sm text-white/60 italic leading-relaxed max-w-xs">
-              « Des images pensées pour raconter, transmettre et marquer. »
+              Â« Des images pensÃ©es pour raconter, transmettre et marquer. Â»
             </p>
           </div>
 
@@ -1109,10 +1142,10 @@ function Footer() {
 
         <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p class="text-xs text-white/40">
-            © 2026 KEMBOU — Tous droits réservés.
+            Â© 2026 KEMBOU â€” Tous droits rÃ©servÃ©s.
           </p>
           <p class="text-xs text-white/40">
-            Portfolio 2026 · Vidéaste & Monteur Vidéo
+            Portfolio 2026 Â· VidÃ©aste & Monteur VidÃ©o
           </p>
         </div>
       </div>
